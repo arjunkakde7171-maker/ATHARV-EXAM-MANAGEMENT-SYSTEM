@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block content %}
+<h1>📱 WhatsApp & Auto Result Notification</h1>
+<div class="box" style="max-width:900px">
+<form method="post" class="form">
+<h2>📧 Automatic Result Email</h2>
+<label><input type="checkbox" name="auto_result_email" value="1" {% if v.auto_result_email=='1' %}checked{% endif %}> Automatically send result by Email after exam submission</label>
+
+<hr>
+<h2>📱 WhatsApp API Settings</h2>
+<label><input type="checkbox" name="whatsapp_enabled" value="1" {% if v.whatsapp_enabled=='1' %}checked{% endif %}> Enable WhatsApp Auto Notification</label>
+<label>WhatsApp Approved API Endpoint</label>
+<input name="whatsapp_api_url" value="{{v.whatsapp_api_url}}" placeholder="Provider API endpoint">
+<label>API Token / Access Token</label>
+<input type="password" name="whatsapp_api_token" value="{{v.whatsapp_api_token}}" placeholder="Provider API token">
+<p><b>टीप:</b> WhatsApp auto messaging साठी अधिकृत WhatsApp Business API किंवा approved provider ची API माहिती आवश्यक आहे. ती नसल्यास Email auto result स्वतंत्रपणे चालू राहील.</p>
+<button class="btn green">💾 Save Notification Settings</button>
+</form>
+</div>{% endblock %}

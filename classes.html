@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🏫 Classes & Logo</h1>
+<div class="form">
+  <h2>➕ Add New Class</h2>
+  <form method="post" action="/classes">
+    <input type="hidden" name="action" value="add">
+    <label>Class Name</label>
+    <input name="name" placeholder="उदा. Computer Basic Batch" required>
+    <label>Description</label>
+    <input name="description" placeholder="Optional">
+    <button class="btn">➕ Add Class</button>
+  </form>
+</div>
+<table>
+<tr><th>Sr.</th><th>Class Name</th><th>Description</th><th>Logo</th><th>Upload / Change Logo</th></tr>
+{% for c in rows %}
+<tr>
+<td>{{loop.index}}</td><td>{{c.name}}</td><td>{{c.description or ''}}</td>
+<td>{% if c.logo %}<img src="/uploads/{{c.logo}}" style="max-height:70px;max-width:140px">{% else %}No Logo{% endif %}</td>
+<td>
+<form method="post" action="/class/{{c.id}}/logo" enctype="multipart/form-data">
+<input type="file" name="logo" accept=".png,.jpg,.jpeg,.webp" required>
+<button class="btn">🖼 Upload Logo</button>
+</form>
+</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

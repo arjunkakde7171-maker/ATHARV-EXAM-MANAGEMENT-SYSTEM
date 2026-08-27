@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block content %}
+<h1>❓ {{exam.title}} - Questions</h1>
+<div class="box">
+<h2>📤 Excel Question Upload</h2>
+<p><a class="btn green" href="/questions/{{exam.id}}/template.xlsx">⬇️ Download Excel Template</a></p>
+<form method="post" action="/questions/{{exam.id}}/upload" enctype="multipart/form-data">
+<input type="file" name="excel_file" accept=".xlsx" required>
+<button class="btn">📤 Upload Questions</button>
+</form>
+<p><b>Languages:</b> English + Marathi + Hindi. प्रत्येक प्रश्न आणि 4 Options तीन भाषांमध्ये upload करता येतील.</p>
+</div>
+<h2>➕ Manual Question Add</h2>
+<form method="post" class="form"><textarea name="question" placeholder="Question (English)" required></textarea><input name="a" placeholder="Option A" required><input name="b" placeholder="Option B" required><input name="c" placeholder="Option C" required><input name="d" placeholder="Option D" required><select name="correct"><option>A</option><option>B</option><option>C</option><option>D</option></select><input type="number" name="marks" value="1"><button class="btn">Add Question</button></form>
+<table><tr><th>#</th><th>Question</th><th>Correct</th><th>Marks</th></tr>{% for q in rows %}<tr><td>{{loop.index}}</td><td>{{q.question}}</td><td>{{q.correct}}</td><td>{{q.marks}}</td></tr>{% endfor %}</table>{% endblock %}

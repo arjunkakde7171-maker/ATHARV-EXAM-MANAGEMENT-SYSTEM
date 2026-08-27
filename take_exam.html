@@ -1,0 +1,23 @@
+{% extends "base.html" %}{% block content %}
+<h1>📝 {{exam.title}}</h1>
+<div class="box">
+<form method="get" id="langform"><b>🌐 Select Exam Language:</b>
+<select name="lang" onchange="this.form.submit()">
+<option value="en" {% if lang=='en' %}selected{% endif %}>🇬🇧 English</option>
+<option value="mr" {% if lang=='mr' %}selected{% endif %}>🇮🇳 मराठी</option>
+<option value="hi" {% if lang=='hi' %}selected{% endif %}>🇮🇳 हिंदी</option>
+</select></form>
+⏱️ Time: <span id="timer"></span> remaining
+</div>
+<form method="post" id="examform"><input type="hidden" name="lang" value="{{lang}}">
+{% for q in qs %}
+{% if lang=='mr' %}{% set question=q.question_mr or q.question %}{% set A=q.a_mr or q.a %}{% set B=q.b_mr or q.b %}{% set C=q.c_mr or q.c %}{% set D=q.d_mr or q.d %}
+{% elif lang=='hi' %}{% set question=q.question_hi or q.question %}{% set A=q.a_hi or q.a %}{% set B=q.b_hi or q.b %}{% set C=q.c_hi or q.c %}{% set D=q.d_hi or q.d %}
+{% else %}{% set question=q.question %}{% set A=q.a %}{% set B=q.b %}{% set C=q.c %}{% set D=q.d %}{% endif %}
+<div class="q"><b>Q{{loop.index}}. {{question}}</b>
+<p><label><input type="radio" name="q_{{q.id}}" value="A"> A. {{A}}</label></p>
+<p><label><input type="radio" name="q_{{q.id}}" value="B"> B. {{B}}</label></p>
+<p><label><input type="radio" name="q_{{q.id}}" value="C"> C. {{C}}</label></p>
+<p><label><input type="radio" name="q_{{q.id}}" value="D"> D. {{D}}</label></p></div>{% endfor %}
+<button class="btn green">Submit Exam</button></form>
+<script>let sec={{exam.duration}}*60;let t=setInterval(()=>{let m=Math.floor(sec/60),s=sec%60;document.getElementById('timer').textContent=m+':'+String(s).padStart(2,'0');if(sec--<=0){clearInterval(t);document.getElementById('examform').submit()}},1000)</script>{% endblock %}
