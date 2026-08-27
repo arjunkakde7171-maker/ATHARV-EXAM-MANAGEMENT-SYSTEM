@@ -1,0 +1,12 @@
+ATHARV EXAM MANAGEMENT SYSTEM - LOGO INSTRUCTIONS
+
+Login page logo file path:
+static\logo.png
+
+To change the logo:
+1. Prepare your logo in PNG/JPG format.
+2. Rename it to logo.png
+3. Replace the existing file: static\logo.png
+4. Restart the application.
+
+Recommended: square logo, at least 300 x 300 pixels.
