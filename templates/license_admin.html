@@ -1,0 +1,60 @@
+{% extends "base.html" %}{% block content %}
+<h1>👨‍💼 License & School Login Management</h1>
+
+<div class="box">
+<h2>🔐 Generate License + School/College Login</h2>
+<p>License तयार होताच त्या School/College साठी <b>User ID आणि Password आपोआप तयार होईल.</b></p>
+<form method="post">
+<input type="hidden" name="action" value="create">
+<input name="institute_name" placeholder="School / College / Institute Name" required>
+<input name="customer_name" placeholder="Customer / Principal Name">
+<input name="mobile" placeholder="Mobile Number">
+<input type="email" name="email" placeholder="School / College Email Address" required>
+<select name="license_type">
+<option value="DEMO">DEMO</option>
+<option value="MONTHLY">MONTHLY</option>
+<option value="ANNUAL" selected>ANNUAL</option>
+<option value="LIFETIME">LIFETIME</option>
+</select>
+<label>Expiry Date (Lifetime साठी रिकामी ठेवा)</label>
+<input type="date" name="expiry_date">
+<input name="notes" placeholder="Notes">
+<button class="btn green">🚀 Generate License & Login</button>
+</form>
+</div>
+
+<div class="box">
+<h2>🏫 All School / College Licenses</h2>
+<div class="table-wrap">
+<table>
+<tr>
+<th>Institute</th><th>License Key</th><th>Plan</th><th>Expiry</th>
+<th>School Login ID</th><th>Password</th><th>Status</th><th>Actions</th>
+</tr>
+{% for x in licenses %}
+<tr>
+<td><b>{{x.institute_name}}</b><br><small>{{x.customer_name or ''}}<br>📧 {{x.email or '-'}}}</small></td>
+<td><code>{{x.license_key}}</code></td>
+<td>{{x.license_type}}</td>
+<td>{{x.expiry_date or 'LIFETIME'}}</td>
+<td><b>{{x.login_username or '-'}}</b></td>
+<td><code>{{x.login_password or '-'}}</code></td>
+<td>{{x.status}}</td>
+<td>
+<form method="post" style="display:inline">
+<input type="hidden" name="action" value="status"><input type="hidden" name="id" value="{{x.id}}">
+<select name="status"><option>ACTIVE</option><option>PENDING</option><option>BLOCKED</option></select>
+<button type="submit">Update</button>
+</form>
+<form method="post" style="display:inline">
+<input type="hidden" name="action" value="reset_device"><input type="hidden" name="id" value="{{x.id}}">
+<button type="submit">Reset Device</button>
+</form>
+<a href="{{ url_for('create_license_admin', license_id=x.id) }}" class="btn">Edit Login</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+</div>
+{% endblock %}

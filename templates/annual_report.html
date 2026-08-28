@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block content %}
+<h1>📊 Annual Report - {{year}}</h1>
+<div class="cards"><div class="card">👨‍🎓 Students<br><b>{{students}}</b></div><div class="card">📝 Exams<br><b>{{exams}}</b></div><div class="card">✅ Pass<br><b>{{a.pass_n or 0}}</b></div><div class="card">❌ Fail<br><b>{{a.fail_n or 0}}</b></div><div class="card">📈 Average %<br><b>{{a.avg_pct or 0}}%</b></div></div>
+<h2>🏆 Top 10 Performers</h2><table><tr><th>Student</th><th>Roll</th><th>Exam</th><th>Marks</th><th>%</th><th>Rank</th></tr>{% for r in tops %}<tr><td>{{r.full_name}}</td><td>{{r.roll_no}}</td><td>{{r.title}}</td><td>{{r.score}}</td><td>{{r.percentage}}</td><td>{{r.rank}}</td></tr>{% endfor %}</table>
+<button class="btn" onclick="window.print()">🖨️ Print Annual Report</button>{% endblock %}

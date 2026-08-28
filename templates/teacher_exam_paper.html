@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}
+<h1>📝 Exam Paper Management</h1>
+<div class="box"><h2>Create Exam Paper</h2><form method="post">
+<input name="title" placeholder="Exam / Paper Name" required>
+<button class="btn green">➕ Create Paper</button></form></div>
+<div class="box"><h2>My Exam Papers</h2><table><tr><th>ID</th><th>Paper</th></tr>
+{% for x in rows %}<tr><td>{{x.id}}</td><td>{{x.title if 'title' in x.keys() else '-'}}</td></tr>{% endfor %}</table></div>
+{% endblock %}
