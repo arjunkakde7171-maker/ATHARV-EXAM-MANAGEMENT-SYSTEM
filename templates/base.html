@@ -68,7 +68,6 @@ input,select,textarea{width:100%;padding:11px;border:1px solid #ccd6e0;border-ra
 {% endif %}
 {% endif %}
 {% if session.get("user") and session["user"].get("role") in ["Admin","Institute Admin","Teacher"] %}
-<a href="{{ url_for('teacher_exam_paper') }}">📝 Exam Paper Add</a>
 {% endif %}</aside><main class="main">{% else %}<main class="main" style="max-width:900px;margin:0 auto;padding-top:30px">{% endif %}
 {% with messages=get_flashed_messages() %}{% if messages %}{% for m in messages %}<div class="flash">{{m}}</div>{% endfor %}{% endif %}{% endwith %}
 {% block content %}{% endblock %}
