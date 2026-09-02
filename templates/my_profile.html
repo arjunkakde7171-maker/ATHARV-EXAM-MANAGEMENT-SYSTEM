@@ -1,6 +1,0 @@
-{% extends "base.html" %}{% block content %}
-<h1>🔐 My Password</h1><div class="box"><p><b>User ID:</b> {{u.username}}</p>
-<form method="post"><input type="password" name="old_password" placeholder="Current Password" required>
-<input type="password" name="new_password" placeholder="New Password" required>
-<input type="password" name="confirm_password" placeholder="Confirm New Password" required>
-<button class="btn green">Change Password</button></form></div>{% endblock %}
